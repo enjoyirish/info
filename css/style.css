@@ -346,7 +346,7 @@ a.ddmenu::before {
 	justify-content: center;
 	align-items: center;
 	transition: transform 0.5s;
-	background: var(--primary-color);	/*背景色。css冒頭のprimary-colorを読み込みます。*/
+	background: #FF7900; /* アイルランド国旗のオレンジ */
 	border-radius: 50%;	/*円形にする。四角形がいいならこの１行を削除。*/
 }
 
