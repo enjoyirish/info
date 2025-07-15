@@ -6,42 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="アイリッシュ音楽をのんびり楽しむ練習サークルです。初心者歓迎、東京で活動中。">
 <link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 
 <body class="home">
 
-<div id="container">
-
-<header>
-
-<h1 class="logo"><a href="index.html"><img src="images/logo.png" alt="Enjoy Irish ゆるゆる練習会"></a></h1>
-
-<nav>
-<ul>
-<li><a href="index.html">ホーム</a></li>
-<li><a href="about.html">練習会について</a></li>
-<li><a href="musiclist.html">過去の練習曲</a></li>
-<li><a href="contact.html">問い合わせ</a></li>
-</ul>
-</nav>
-
-</header>
+<div id="header"></div>
+<div id="menubar-area"></div>
 
 <div id="contents">
-
-<!--スライドショー-->
-<aside id="mainimg">
-
-<div class="slide slide1">
-</div>
-
-
-
-</aside>
-
 <main>
+  <div style="display: flex; justify-content: center; align-items: center; margin: 0 0 60px 0;">
+    <img src="images/1.jpg" alt="Enjoy Irish メインビジュアル" style="max-width: 80vw; max-height: 60vh; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+  </div>
 
-<section>
+	<section>
 
 	<div class="list-free">
 		<div class="w1">
@@ -55,78 +34,16 @@
 		  参考→→→<a href="musiclist.html">過去の練習曲</a></p>
 		</div>
 	  </div>
-	  
-
-
-</section>
-
-
-
+	  </section>
 </main>
 
 </div>
-<!--/#contents-->
 
-<footer>
-
-
-
-<!--
-<ul class="icons">
-<li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-<li><a href="#"><i class="fab fa-line"></i></a></li>
-<li><a href="#"><i class="fab fa-youtube"></i></a></li>
-<li><a href="#"><i class="fab fa-instagram"></i></a></li>
-</ul>
--->
-
-<div id="copyright">
-Copyright&copy; <a href="index.html">Enjoy Irish ゆるゆる練習会</a> All Rights Reserved.
-<span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
-</div>
-
-</footer>
-
-</div>
-<!--/#container-->
-
-<!--開閉ボタン（ハンバーガーアイコン）-->
-<div id="menubar_hdr">
-<div class="menu-icon">
-<span></span><span></span><span></span>
-</div>
-</div>
-
-<!--開閉ブロック-->
-<div id="menubar">
-
-<p class="logo"><img src="images/logo.png" alt="sample stationery"></p>
-
-<nav>
-<ul>
-<li><a href="index.html">ホーム</a></li>
-<li><a href="about.html">練習会について</a></li>
-<li><a href="musiclist.html">過去の練習曲</a></li>
-<li><a href="contact.html">問い合わせ</a></li>
-</ul>
-</nav>
-
-
-</div>
-<!--/#menubar-->
+<div id="footer"></div>
 
 <!--jQueryの読み込み-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<!--スライドショー（slick）-->
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="js/slick.js"></script>
-
-<!--パララックス（inview）-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
-<script src="js/jquery.inview_set.js"></script>
-
-<!--このテンプレート専用のスクリプト-->
+<script src="js/common.js"></script>
 <script src="js/main.js"></script>
 
 </body>

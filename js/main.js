@@ -20,131 +20,117 @@ function debounce(func, wait) {
 // メニュー関連
 //===============================================================
 
-// 変数でセレクタを管理
-var $menubar = $('#menubar');
-var $menubarHdr = $('#menubar_hdr');
-var $headerNav = $('header nav');
+function initMenuEvents() {
+  // 変数でセレクタを管理
+  var $menubar = $('#menubar');
+  var $menubarHdr = $('#menubar_hdr');
+  var $headerNav = $('header nav');
 
-// menu
-$(window).on("load resize", debounce(function() {
-    if(window.innerWidth < 9999) {	// ここがブレイクポイント指定箇所です
-        // 小さな端末用の処理
-        $('body').addClass('small-screen').removeClass('large-screen');
-        $menubar.addClass('display-none').removeClass('display-block');
-        $menubarHdr.removeClass('display-none ham').addClass('display-block');
-    } else {
-        // 大きな端末用の処理
-        $('body').addClass('large-screen').removeClass('small-screen');
-        $menubar.addClass('display-block').removeClass('display-none');
-        $menubarHdr.removeClass('display-block').addClass('display-none');
+  // menu
+  $(window).on("load resize", debounce(function() {
+      if(window.innerWidth < 9999) {
+          $('body').addClass('small-screen').removeClass('large-screen');
+          $menubar.addClass('display-none').removeClass('display-block');
+          $menubarHdr.removeClass('display-none ham').addClass('display-block');
+      } else {
+          $('body').addClass('large-screen').removeClass('small-screen');
+          $menubar.addClass('display-block').removeClass('display-none');
+          $menubarHdr.removeClass('display-block').addClass('display-none');
+          $('.ddmenu_parent > ul').hide();
+      }
+  }, 10));
 
-        // ドロップダウンメニューが開いていれば、それを閉じる
-        $('.ddmenu_parent > ul').hide();
-    }
-}, 10));
+  // ハンバーガーメニューをクリックした際の処理
+  $menubarHdr.click(function() {
+      $(this).toggleClass('ham');
+      if ($(this).hasClass('ham')) {
+          $menubar.addClass('display-block');
+      } else {
+          $menubar.removeClass('display-block');
+      }
+  });
 
-$(function() {
+  // アンカーリンクの場合にメニューを閉じる処理
+  $menubar.find('a[href*="#"]').click(function() {
+      $menubar.removeClass('display-block');
+      $menubarHdr.removeClass('ham');
+  });
 
-    // ハンバーガーメニューをクリックした際の処理
-    $menubarHdr.click(function() {
-        $(this).toggleClass('ham');
-        if ($(this).hasClass('ham')) {
-            $menubar.addClass('display-block');
-        } else {
-            $menubar.removeClass('display-block');
-        }
-    });
+  // ドロップダウンの親liタグ（空のリンクを持つaタグのデフォルト動作を防止）
+  $menubar.find('a[href=""]').click(function() {
+      return false;
+  });
+  $headerNav.find('a[href=""]').click(function() {
+      return false;
+  });
 
-    // アンカーリンクの場合にメニューを閉じる処理
-    $menubar.find('a[href*="#"]').click(function() {
-        $menubar.removeClass('display-block');
-        $menubarHdr.removeClass('ham');
-    });
+  // ドロップダウンメニューの処理
+  $menubar.find('li:has(ul)').addClass('ddmenu_parent');
+  $('.ddmenu_parent > a').addClass('ddmenu');
+  $headerNav.find('li:has(ul)').addClass('ddmenu_parent');
+  $('.ddmenu_parent > a').addClass('ddmenu');
 
-    // ドロップダウンの親liタグ（空のリンクを持つaタグのデフォルト動作を防止）
-	$menubar.find('a[href=""]').click(function() {
-		return false;
-	});
-	$headerNav.find('a[href=""]').click(function() {
-		return false;
-	});
+  // タッチ開始位置を格納する変数
+  var touchStartY = 0;
 
-	// ドロップダウンメニューの処理
-    $menubar.find('li:has(ul)').addClass('ddmenu_parent');
-    $('.ddmenu_parent > a').addClass('ddmenu');
-    $headerNav.find('li:has(ul)').addClass('ddmenu_parent');
-    $('.ddmenu_parent > a').addClass('ddmenu');
+  // タッチデバイス用
+  $('.ddmenu').on('touchstart', function(e) {
+      touchStartY = e.originalEvent.touches[0].clientY;
+  }).on('touchend', function(e) {
+      var touchEndY = e.originalEvent.changedTouches[0].clientY;
+      var touchDifference = touchStartY - touchEndY;
+      if (Math.abs(touchDifference) < 10) {
+          var $nextUl = $(this).next('ul');
+          if ($nextUl.is(':visible')) {
+              $nextUl.stop().hide();
+          } else {
+              $nextUl.stop().show();
+          }
+          $('.ddmenu').not(this).next('ul').hide();
+          return false;
+      }
+  });
 
-// タッチ開始位置を格納する変数
-var touchStartY = 0;
+  //PC用
+  $('.ddmenu_parent').hover(function() {
+      $(this).children('ul').stop().show();
+  }, function() {
+      $(this).children('ul').stop().hide();
+  });
 
-// タッチデバイス用
-$('.ddmenu').on('touchstart', function(e) {
-    // タッチ開始位置を記録
-    touchStartY = e.originalEvent.touches[0].clientY;
-}).on('touchend', function(e) {
-    // タッチ終了時の位置を取得
-    var touchEndY = e.originalEvent.changedTouches[0].clientY;
-    
-    // タッチ開始位置とタッチ終了位置の差分を計算
-    var touchDifference = touchStartY - touchEndY;
-    
-    // スクロール動作でない（差分が小さい）場合にのみドロップダウンを制御
-    if (Math.abs(touchDifference) < 10) { // 10px以下の移動ならタップとみなす
-        var $nextUl = $(this).next('ul');
-        if ($nextUl.is(':visible')) {
-            $nextUl.stop().hide();
-        } else {
-            $nextUl.stop().show();
-        }
-        $('.ddmenu').not(this).next('ul').hide();
-        return false; // ドロップダウンのリンクがフォローされるのを防ぐ
-    }
-});
+  // ドロップダウンをページ内リンクで使った場合に、ドロップダウンを閉じる
+  $('.ddmenu_parent ul a').click(function() {
+      $('.ddmenu_parent > ul').hide();
+  });
+}
 
-    //PC用
-    $('.ddmenu_parent').hover(function() {
-        $(this).children('ul').stop().show();
-    }, function() {
-        $(this).children('ul').stop().hide();
-    });
-
-    // ドロップダウンをページ内リンクで使った場合に、ドロップダウンを閉じる
-    $('.ddmenu_parent ul a').click(function() {
-        $('.ddmenu_parent > ul').hide();
-    });
-
-});
+// ページロード時にも初期化
+$(function(){ initMenuEvents(); });
 
 
 //===============================================================
 // 小さなメニューが開いている際のみ、body要素のスクロールを禁止。
 //===============================================================
-$(function() {
+function initBodyScrollObserver() {
   function toggleBodyScroll() {
-    // 条件をチェック
-    if ($('#menubar_hdr').hasClass('ham') && !$('#menubar_hdr').hasClass('display-none')) {
-      // #menubar_hdr が 'ham' クラスを持ち、かつ 'display-none' クラスを持たない場合、スクロールを禁止
-      $('body').css({
-        overflow: 'hidden',
-        height: '100%'
-      });
+    var menubarHdr = document.getElementById('menubar_hdr');
+    if (menubarHdr && menubarHdr.classList.contains('ham') && !menubarHdr.classList.contains('display-none')) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.height = '100%';
     } else {
-      // その他の場合、スクロールを再び可能に
-      $('body').css({
-        overflow: '',
-        height: ''
-      });
+      document.body.style.overflow = '';
+      document.body.style.height = '';
     }
   }
-
-  // 初期ロード時にチェックを実行
   toggleBodyScroll();
-
-  // クラスが動的に変更されることを想定して、MutationObserverを使用
-  const observer = new MutationObserver(toggleBodyScroll);
-  observer.observe(document.getElementById('menubar_hdr'), { attributes: true, attributeFilter: ['class'] });
-});
+  var menubarHdr = document.getElementById('menubar_hdr');
+  if (menubarHdr) {
+    const observer = new MutationObserver(toggleBodyScroll);
+    observer.observe(menubarHdr, { attributes: true, attributeFilter: ['class'] });
+  }
+}
+// ページロード時にも初期化
+$(function(){ initBodyScrollObserver(); });
 
 
 //===============================================================
@@ -254,23 +240,4 @@ $(function() {
             newImage.fadeIn(400);
         });
     });
-});
-
-
-//===============================================================
-// スライドショー
-//===============================================================
-$(function() {
-	var slides = $('#mainimg .slide');
-	var slideCount = slides.length;
-	var currentIndex = 0;
-
-	slides.eq(currentIndex).css('opacity', 1).addClass('active');
-
-	setInterval(function() {
-		var nextIndex = (currentIndex + 1) % slideCount;
-		slides.eq(currentIndex).css('opacity', 0).removeClass('active');
-		slides.eq(nextIndex).css('opacity', 1).addClass('active');
-		currentIndex = nextIndex;
-	}, 4000); // 4秒ごとにスライドを切り替える
 });
