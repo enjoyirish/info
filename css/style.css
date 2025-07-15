@@ -1,7 +1,5 @@
 @charset "utf-8";
 
-
-
 /*Font Awesomeの読み込み
 ---------------------------------------------------------------------------*/
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
@@ -10,17 +8,6 @@
 /*Google Fontsの読み込み
 ---------------------------------------------------------------------------*/
 @import url('https://fonts.googleapis.com/css2?family=Murecho:wght@100..900&display=swap');
-
-
-/*slick.cssの読み込み
----------------------------------------------------------------------------*/
-@import url("https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css");
-
-
-/*テンプレート専用cssファイルの読み込み
----------------------------------------------------------------------------*/
-@import url("slide.css");
-@import url("inview.css");
 
 
 /*CSSカスタムプロパティ（サイト全体を一括管理する為の設定）
@@ -152,9 +139,9 @@ a:hover {
 コンテンツ内容が少なくてもフッターが画面下に配置される為の指示なので変更不要。
 ---------------------------------------------------------------------------*/
 #container {
-	height: 100vh;
-	display: flex;
-	flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -467,7 +454,6 @@ main .style1 {
 
 main .style1::before {
 	content: "";
-	background: url("../images/bg2.svg") repeat-x left bottom / auto 6px;	/*アクセント用画像を指定。6pxは高さで、下のheightと数字を合わせます。*/
 	display: block;
 	position: absolute;
 	left: 0px;
