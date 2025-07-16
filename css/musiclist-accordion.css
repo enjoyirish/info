@@ -26,34 +26,4 @@
 .music-list {
   margin: 0;
   padding-left: 0.5em;
-}
-
-/* 月ボタンバー（横並び） */
-.month-bar {
-  display: flex;
-  gap: 0.5em;
-  margin-bottom: 1em;
-}
-
-/* 月ボタン */
-.month-toggle {
-  flex: 1 1 0;
-  background: #f8f8f8;
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
-  border-radius: 4px 4px 0 0;
-  padding: 0.4em 0.2em;
-  font-size: 1em;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-.month-toggle:hover,
-.month-toggle[data-active="1"] {
-  background: var(--primary-color);
-  color: #fff;
-  font-weight: bold;
-}
-
-.month-list {
-  margin-bottom: 1em;
 } 
