@@ -1,9 +1,5 @@
 @charset "utf-8";
 
-/* =============================
-   サイト全体共通の読み込み・変数・フッターアニメーション
-   ============================= */
-
 /* Font Awesomeの読み込み */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
 
@@ -15,13 +11,6 @@
 	--primary-color: #88d48e; /*テンプレートのメインまたはアクセントカラー*/
 	--primary-inverse-color: #fff; /*上のprimary-colorの対となる色*/
 	--global-space: 7vw; /*主に余白の一括管理用。画面幅100%＝100vwです。*/
-}
-
-/* slide1のキーフレーム設定（footer背景に使用） */
-@keyframes slide1 {
-	0% {background-position: center bottom;}
-	50% {background-position: 50px bottom;}
-	100% {background-position: center bottom;}
 }
 
 /* リンクテキスト全般の設定 */
@@ -148,7 +137,7 @@ header nav ul ul a {
 #menubar ul {
   width: 100%;
   max-width: 400px;
-  padding: 0;
+  padding: 40px;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -231,24 +220,23 @@ a.ddmenu::before {
 
 /* フッター */
 footer {
-	font-size: 0.8rem;
-	border-top: 3px solid var(--primary-color);
+	display: flex; /* flexboxを有効化 */
+	justify-content: center; /* 水平方向の中央配置 */
+	align-items: center; /* 垂直方向の中央配置 */
+	font-size: 0.9rem;
 	padding: var(--global-space);
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	gap: 3vw;
-	color: var(--primary-color);
-	background: url("../images/bg_footer.png") no-repeat center bottom / 100%;
-	animation: slide1 10s linear infinite;
+	color: var(--primary-inverse-color); /* ヘッダーと同じ白色テキスト */
+	background: var(--primary-color); /* ヘッダーと同じ緑色背景 */
+	width: 100vw; /* 画面幅いっぱいに表示 */
+	margin-left: calc(-1 * var(--global-space)); /* 左側のパディングを相殺 */
+	margin-right: calc(-1 * var(--global-space)); /* 右側のパディングを相殺 */
 }
-footer a {text-decoration: none;color: inherit;}
-footer nav {display: flex;gap: 3vw;font-weight: bold;}
-footer nav ul {flex: 1;}
-footer nav a {font-weight: normal;}
-#copyright {width: 100%;}
-ul.icons {list-style: none;margin: 0;padding: 0;display: flex;gap: 1rem;}
-.icons i {font-size: 30px;} 
+
+/* フッター内のリンクスタイル */
+footer a {
+	text-decoration: none;
+	color: inherit;
+}
 
 .menu-logo {
   display: block;
