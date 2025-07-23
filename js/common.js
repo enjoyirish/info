@@ -19,13 +19,13 @@ function includeCommonParts() {
       if (document.getElementById('footer') && footer) {
         document.getElementById('footer').innerHTML = footer.innerHTML;
       }
-      // 共通パーツ挿入後にメニューイベント再初期化
-      if (typeof initMenuEvents === 'function') {
-        initMenuEvents();
-      }
       // 共通パーツ挿入後にbodyスクロール監視も再初期化
       if (typeof initBodyScrollObserver === 'function') {
         initBodyScrollObserver();
+      }
+      // 共通パーツ挿入後にメニューバーイベントも初期化
+      if (typeof setupMenubarEvents === 'function') {
+        setupMenubarEvents();
       }
     });
 }

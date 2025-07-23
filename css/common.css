@@ -132,12 +132,81 @@ header nav ul ul a {
 	border: 1px solid var(--primary-color);
 }
 
-/* メニューブロック初期設定 */
-#menubar {display: none;}
-#menubar ul {list-style: none;margin: 0;padding: 0;}
-#menubar a {display: block;text-decoration: none;}
-.large-screen #menubar {display: block;}
-.small-screen #menubar.display-block {display: block;}
+#menubar {
+  display: none;
+}
+#menubar.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: var(--primary-color);
+}
+#menubar ul {
+  width: 100%;
+  max-width: 400px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+#menubar li {
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#menubar a {
+  display: block;
+  width: 100%;
+  padding: 1rem 1.2rem;
+  font-size: 1.2rem;
+  color: #fff;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  text-align: left;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  font-family: inherit;
+}
+#menubar a:hover {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+#menubar .logo,
+#menubar h1 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: #fff;
+  font-size: 2.2rem;
+  font-family: 'Murecho', '游ゴシック体', 'YuGothic', sans-serif;
+  letter-spacing: 0.1em;
+}
+#menubar_hdr {
+  position: fixed;
+  z-index: 2100;
+  cursor: pointer;
+  top: 5px;
+  right: 10px;
+  width: 80px;
+  height: 80px;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #FF7900;
+  border-radius: 50%;
+}
+#menubar_hdr:hover {transform: scale(1.2);}
+@media screen and (min-width:900px) {
+  #menubar_hdr {top: 34px;}
+}
 #menubar_hdr.display-none {display: none;}
 .ddmenu_parent ul {display: none;}
 a.ddmenu::before {
@@ -148,15 +217,6 @@ a.ddmenu::before {
 }
 
 /* 開閉メニュー */
-.small-screen #menubar.display-block {
-	position: fixed;overflow: auto;z-index: 100;
-	right: 0px;top: 0px;
-	width: 100%;height: 100%;
-	padding: 90px 10vw 50px;
-	background: var(--primary-color);
-	color: var(--primary-inverse-color);
-	animation: animation1 0.2s both;
-}
 .small-screen #menubar ul ul {margin: 2rem;}
 .small-screen #menubar nav ul li {
 	border: 1px solid var(--primary-inverse-color);
@@ -168,44 +228,6 @@ a.ddmenu::before {
 	color: var(--primary-color);
 	background: var(--primary-inverse-color);
 }
-
-/* ハンバーガーアイコン */
-#menubar_hdr {
-	animation: opa1 0.3s 0.5s both;
-	position: fixed;z-index: 101;
-	cursor: pointer;
-	top: 5px;right: 10px;
-	width: 50px;height: 50px;
-	padding: 15px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	transition: transform 0.5s;
-	background: #FF7900;
-	border-radius: 50%;
-}
-@media screen and (min-width:900px) {
-	#menubar_hdr {top: 34px;}
-}
-#menubar_hdr:hover {transform: scale(1.2);}
-#menubar_hdr.ham {width: 80px;height: 80px;}
-#menubar_hdr div {
-	position: relative;width: 100%;height: 100%;
-	display: flex;flex-direction: column;justify-content: space-between;
-}
-#menubar_hdr div span {
-	display: block;width: 100%;height: 2px;
-	background-color: var(--primary-inverse-color);
-	border-radius: 2px;
-	transition: all 0.5s ease-in-out;
-	position: absolute;
-}
-#menubar_hdr div span:nth-child(1) {top: 0;}
-#menubar_hdr div span:nth-child(2) {top: 50%;transform: translateY(-50%);}
-#menubar_hdr div span:nth-child(3) {bottom: 0;}
-#menubar_hdr.ham div span:nth-child(1) {top: 50%;transform: translateY(-50%) rotate(45deg);}
-#menubar_hdr.ham div span:nth-child(2) {opacity: 0;}
-#menubar_hdr.ham div span:nth-child(3) {top: 50%;transform: translateY(-50%) rotate(-45deg);}
 
 /* フッター */
 footer {
@@ -227,3 +249,14 @@ footer nav a {font-weight: normal;}
 #copyright {width: 100%;}
 ul.icons {list-style: none;margin: 0;padding: 0;display: flex;gap: 1rem;}
 .icons i {font-size: 30px;} 
+
+.menu-logo {
+  display: block;
+  margin: 0 auto 2.5rem auto;
+  width: clamp(300px, 20vw, 600px);
+  height: auto;
+} 
+.menu-icon i {
+  font-size: 2rem;
+  color: #fff;
+} 
