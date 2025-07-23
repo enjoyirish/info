@@ -173,3 +173,10 @@ body {
 html, body {
   font-size: 13px;
 }
+.contact-link {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  text-decoration: underline;
+  font-weight: 500;
+}

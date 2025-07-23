@@ -105,7 +105,7 @@ function initMenuEvents() {
 }
 
 // ページロード時にも初期化
-$(function(){ initMenuEvents(); });
+// $(function(){ initMenuEvents(); });
 
 
 //===============================================================
@@ -130,7 +130,7 @@ function initBodyScrollObserver() {
   }
 }
 // ページロード時にも初期化
-$(function(){ initBodyScrollObserver(); });
+// $(function(){ initBodyScrollObserver(); });
 
 
 //===============================================================
