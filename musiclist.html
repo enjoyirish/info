@@ -5,10 +5,14 @@
 		<title>Enjoy Irish ゆるゆる練習会</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="アイリッシュ音楽をのんびり楽しむ練習サークルです。初心者歓迎、東京で活動中。">
+		<link rel="stylesheet" href="css/common.css">
 		<link rel="stylesheet" href="css/style.css">
-		</head>
+		<link rel="stylesheet" href="css/musiclist-accordion.css">
+		<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+	</head>
 
 <body>
+<<<<<<< HEAD
 
 <div id="container">
 
@@ -92,33 +96,26 @@
 
 </div>
 <!--/#menubar-->
+=======
+<div id="header"></div>
+<div id="menubar-area"></div>
+  <div id="container">
+    <div id="contents">
+      <main>
+        <section>
+          <h2 class="c box1">過去の練習曲</h2>
+          <div id="tunes-container">読み込み中...</div>
+        </section>
+      </main>
+    </div>
+  </div>
+<div id="footer"></div>
+>>>>>>> f1f5d13f1a98a3594cb478c25aed77d66113fea2
 
 <!--jQueryの読み込み-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<!-- 曲リスト読み込み用スクリプト -->
-<script>
-	fetch('tunes/tunes-list.html')
-	  .then(response => response.text())
-	  .then(data => {
-		document.getElementById('tunes-container').innerHTML = data;
-	  })
-	  .catch(error => {
-		document.getElementById('tunes-container').innerText = '曲リストの読み込みに失敗しました。';
-		console.error(error);
-	  });
-	</script>
-	
-<!--スライドショー（slick）-->
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="js/slick.js"></script>
-
-<!--パララックス（inview）-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/protonet-jquery.inview/1.1.2/jquery.inview.min.js"></script>
-<script src="js/jquery.inview_set.js"></script>
-
-<!--このテンプレート専用のスクリプト-->
+<script src="js/common.js"></script>
 <script src="js/main.js"></script>
-
+<script src="js/musiclist-accordion.js"></script>
 </body>
 </html>

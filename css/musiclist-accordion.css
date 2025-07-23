@@ -1,0 +1,29 @@
+/* musiclist-accordion.css - アコーディオンUI専用スタイル */
+
+.accordion .year-section {
+  margin-bottom: 1em;
+}
+
+/* 年ボタン */
+.year-toggle {
+  width: 100%;
+  text-align: left;
+  font-size: 1.2em;
+  color: var(--primary-color);
+  background: #fff;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  padding: 0.5em;
+  margin-bottom: 0.2em;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.year-toggle:hover {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.music-list {
+  margin: 0;
+  padding-left: 0.5em;
+} 

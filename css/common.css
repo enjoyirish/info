@@ -1,0 +1,229 @@
+@charset "utf-8";
+
+/* =============================
+   サイト全体共通の読み込み・変数・フッターアニメーション
+   ============================= */
+
+/* Font Awesomeの読み込み */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+
+/* Google Fontsの読み込み */
+@import url('https://fonts.googleapis.com/css2?family=Murecho:wght@100..900&display=swap');
+
+/* CSSカスタムプロパティ（サイト全体を一括管理する為の設定） */
+:root {
+	--primary-color: #88d48e; /*テンプレートのメインまたはアクセントカラー*/
+	--primary-inverse-color: #fff; /*上のprimary-colorの対となる色*/
+	--global-space: 7vw; /*主に余白の一括管理用。画面幅100%＝100vwです。*/
+}
+
+/* slide1のキーフレーム設定（footer背景に使用） */
+@keyframes slide1 {
+	0% {background-position: center bottom;}
+	50% {background-position: 50px bottom;}
+	100% {background-position: center bottom;}
+}
+
+/* リンクテキスト全般の設定 */
+a {
+	color: inherit;
+	transition: 0.3s;
+}
+a:hover {
+	text-decoration: none;
+	opacity: 0.9;
+}
+
+/* コンテナー（サイト全体を囲むブロック） */
+#container {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+/* メインコンテンツ */
+#contents {
+	flex: 1;
+	padding: 0 var(--global-space);
+}
+
+/* mainブロック */
+main {
+	padding: var(--global-space) 0;
+}
+
+/* 汎用input, section間余白 */
+input {font-size: 1rem;}
+section + section {
+	margin-top: var(--global-space);
+}
+
+/* =============================
+   サイト全体のリセットCSS・レイアウト基礎
+   ============================= */
+
+/* すべての要素のbox-sizingをborder-boxに */
+body * {box-sizing: border-box;}
+
+/* デフォルト余白・リスト・画像などのリセット */
+
+nav ul {list-style: none;}
+nav,ul,li,ol {margin: 0;padding: 0;}
+section li {margin-left: 1rem;}
+
+/* テーブルの初期化 */
+table {border-collapse:collapse;}
+
+/* 画像の初期化 */
+img {border: none;max-width: 100%;height: auto;vertical-align: middle;}
+
+
+/* 共通パーツ（header, menubar, footer）用CSS */
+
+/*header（ロゴが入った最上段のブロック）*/
+header {
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 100px;
+	padding: 0 var(--global-space);
+	font-optical-sizing: auto;
+	font-weight: 700;
+	background: var(--primary-color);
+	color: var(--primary-inverse-color);
+}
+header a {color: inherit;}
+.logo a {display: block;text-decoration: none;}
+.logo img {display: block;}
+.logo {
+	margin: 0;
+	padding: 0;
+	font-size: 1.5rem;
+	font-weight: 500;
+	letter-spacing: 0.1em;
+}
+.logo img {
+	width: clamp(300px, 20vw, 600px);
+	height: auto;
+	display: block;
+}
+@media screen and (min-width:900px) {
+	header {height: 120px;}
+	.logo {width: 300px;}
+}
+
+/* ヘッダー内メニュー */
+header nav ul {display: none;}
+@media screen and (min-width:900px) {
+	header > nav > ul {display: flex;font-size: 0.85rem;}
+	header nav li a {display: block;text-decoration: none;padding: 0.5rem 1rem;}
+}
+
+/* ドロップダウンメニュー共通 */
+header nav ul ul,
+.small-screen #menubar ul ul {animation: opa1 0.5s 0.1s both;}
+header nav ul ul {position: absolute;z-index: 100;}
+header nav ul ul a {
+	background: var(--primary-inverse-color);
+	color: var(--primary-color);
+	padding: 0.3em 1em;
+	margin-top: 4px;
+	border: 1px solid var(--primary-color);
+}
+
+/* メニューブロック初期設定 */
+#menubar {display: none;}
+#menubar ul {list-style: none;margin: 0;padding: 0;}
+#menubar a {display: block;text-decoration: none;}
+.large-screen #menubar {display: block;}
+.small-screen #menubar.display-block {display: block;}
+#menubar_hdr.display-none {display: none;}
+.ddmenu_parent ul {display: none;}
+a.ddmenu::before {
+	font-family: "Font Awesome 6 Free";
+	content: "\f078";
+	font-weight: bold;
+	margin-right: 0.5em;
+}
+
+/* 開閉メニュー */
+.small-screen #menubar.display-block {
+	position: fixed;overflow: auto;z-index: 100;
+	right: 0px;top: 0px;
+	width: 100%;height: 100%;
+	padding: 90px 10vw 50px;
+	background: var(--primary-color);
+	color: var(--primary-inverse-color);
+	animation: animation1 0.2s both;
+}
+.small-screen #menubar ul ul {margin: 2rem;}
+.small-screen #menubar nav ul li {
+	border: 1px solid var(--primary-inverse-color);
+	margin: 1rem 0;
+	border-radius: 5px;
+}
+.small-screen #menubar a {color: inherit;padding: 1rem 2rem;}
+.small-screen #menubar a:hover {
+	color: var(--primary-color);
+	background: var(--primary-inverse-color);
+}
+
+/* ハンバーガーアイコン */
+#menubar_hdr {
+	animation: opa1 0.3s 0.5s both;
+	position: fixed;z-index: 101;
+	cursor: pointer;
+	top: 5px;right: 10px;
+	width: 50px;height: 50px;
+	padding: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: transform 0.5s;
+	background: #FF7900;
+	border-radius: 50%;
+}
+@media screen and (min-width:900px) {
+	#menubar_hdr {top: 34px;}
+}
+#menubar_hdr:hover {transform: scale(1.2);}
+#menubar_hdr.ham {width: 80px;height: 80px;}
+#menubar_hdr div {
+	position: relative;width: 100%;height: 100%;
+	display: flex;flex-direction: column;justify-content: space-between;
+}
+#menubar_hdr div span {
+	display: block;width: 100%;height: 2px;
+	background-color: var(--primary-inverse-color);
+	border-radius: 2px;
+	transition: all 0.5s ease-in-out;
+	position: absolute;
+}
+#menubar_hdr div span:nth-child(1) {top: 0;}
+#menubar_hdr div span:nth-child(2) {top: 50%;transform: translateY(-50%);}
+#menubar_hdr div span:nth-child(3) {bottom: 0;}
+#menubar_hdr.ham div span:nth-child(1) {top: 50%;transform: translateY(-50%) rotate(45deg);}
+#menubar_hdr.ham div span:nth-child(2) {opacity: 0;}
+#menubar_hdr.ham div span:nth-child(3) {top: 50%;transform: translateY(-50%) rotate(-45deg);}
+
+/* フッター */
+footer {
+	font-size: 0.8rem;
+	border-top: 3px solid var(--primary-color);
+	padding: var(--global-space);
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 3vw;
+	color: var(--primary-color);
+	background: url("../images/bg_footer.png") no-repeat center bottom / 100%;
+	animation: slide1 10s linear infinite;
+}
+footer a {text-decoration: none;color: inherit;}
+footer nav {display: flex;gap: 3vw;font-weight: bold;}
+footer nav ul {flex: 1;}
+footer nav a {font-weight: normal;}
+#copyright {width: 100%;}
+ul.icons {list-style: none;margin: 0;padding: 0;display: flex;gap: 1rem;}
+.icons i {font-size: 30px;} 
