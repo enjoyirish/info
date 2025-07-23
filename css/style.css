@@ -113,8 +113,7 @@ main h3 {
 	}
 
 	/*その他（汎用向け）お好みでもっと追加して使ってもOK*/
-	.list-free .w1 {width: 30%;}
-	.list-free .w2 {width: 50%;}
+	
 	.list-free .order1 {order: 1;}
 	.list-free .order2 {order: 2;}
 	.list-free .order3 {order: 3;}
