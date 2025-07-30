@@ -220,16 +220,22 @@ a.ddmenu::before {
 
 /* フッター */
 footer {
-	display: flex; /* flexboxを有効化 */
-	justify-content: center; /* 水平方向の中央配置 */
-	align-items: center; /* 垂直方向の中央配置 */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	font-size: 0.9rem;
 	padding: var(--global-space);
-	color: var(--primary-inverse-color); /* ヘッダーと同じ白色テキスト */
-	background: var(--primary-color); /* ヘッダーと同じ緑色背景 */
-	width: 100vw; /* 画面幅いっぱいに表示 */
-	margin-left: calc(-1 * var(--global-space)); /* 左側のパディングを相殺 */
-	margin-right: calc(-1 * var(--global-space)); /* 右側のパディングを相殺 */
+	color: var(--primary-inverse-color);
+	background: var(--primary-color);
+	width: 100%;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+/* フッターを画面幅いっぱいに表示 */
+#footer {
+	width: 100vw;
+	margin-left: calc((100vw - 100%) / -2);
 }
 
 /* フッター内のリンクスタイル */
