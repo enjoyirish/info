@@ -9,6 +9,7 @@
 		<meta name="robots" content="index, follow">
 		<link rel="stylesheet" href="css/common.css">
 		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/roulette.css">
 		<link rel="icon" href="images/favicon.ico" type="image/x-icon">
 		</head>
 
@@ -19,6 +20,12 @@
       <main>
         <section>
           <h2 class="c box1">過去の練習曲</h2>
+          <div class="roulette-section">
+            <button id="roulette-button" class="roulette-button" onclick="spinRoulette()">
+              <i class="fas fa-dice"></i> ルーレットを回す
+            </button>
+            <div id="roulette-result" class="roulette-result" style="display: none;"></div>
+          </div>
           <div id="tunes-container">読み込み中...</div>
         </section>
       </main>
@@ -31,5 +38,6 @@
 <script src="js/common.js"></script>
 <script src="js/main.js"></script>
 <script src="js/musiclist-accordion.js"></script>
+<script src="js/roulette.js"></script>
 </body>
 </html>

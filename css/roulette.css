@@ -1,0 +1,93 @@
+/* roulette.css - ルーレット機能専用スタイル */
+
+/* ルーレット機能のスタイル */
+.roulette-section {
+  margin-bottom: 2em;
+  text-align: center;
+}
+
+.roulette-button {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 1em 2em;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.roulette-button:hover {
+  background: #6fc275;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.roulette-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.roulette-button i {
+  font-size: 1.3rem;
+}
+
+.roulette-result {
+  margin-top: 2em;
+  padding: 1.5em;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 2px solid var(--primary-color);
+  animation: fadeIn 0.5s ease;
+}
+
+.roulette-result-content {
+  text-align: center;
+}
+
+.roulette-result-content h3 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  margin-bottom: 1em;
+  font-weight: 500;
+}
+
+.selected-tune {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  padding: 0.5em;
+  background: #fff;
+  border-radius: 8px;
+  display: inline-block;
+  min-width: 200px;
+}
+
+.selected-tune a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.selected-tune a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
