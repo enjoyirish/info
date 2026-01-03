@@ -1,18 +1,76 @@
 // roulette.js
-// --- ルーレット機能：過去の練習曲からランダムに1曲を抽出 ---
+// --- ルーレット機能：過去の練習曲からランダムに1曲を抽出（ジャンル別対応） ---
 
 // すべての練習曲を格納する変数
 let allTunes = [];
+// ジャンルごとに分類した曲を格納する変数
+let tunesByGenre = {
+  'Jig': [],
+  'Reel': [],
+  'Polka': [],
+  'Hornpipe': [],
+  'Air': [],
+  'other': []
+};
 
 // tunes-list.htmlを取得してすべての練習曲を抽出
 fetch('tunes/tunes-list.html')
   .then(response => response.text())
   .then(data => {
     allTunes = extractAllTunes(data);
+    categorizeTunesByGenre();
   })
   .catch(error => {
     console.error('曲リストの読み込みに失敗しました:', error);
   });
+
+// 曲名からジャンルを抽出する関数
+function extractGenre(tuneName) {
+  // 括弧内のジャンル名を抽出
+  const genreMatch = tuneName.match(/\(([^)]+)\)/);
+  if (!genreMatch) return null;
+  
+  const genreText = genreMatch[1].trim();
+  
+  // 主要ジャンルをチェック
+  if (genreText.includes('Jig') && !genreText.includes('Slip jig')) {
+    return 'Jig';
+  } else if (genreText.includes('Reel')) {
+    return 'Reel';
+  } else if (genreText.includes('Polka')) {
+    return 'Polka';
+  } else if (genreText.includes('Hornpipe')) {
+    return 'Hornpipe';
+  } else if (genreText.includes('Air') || genreText.includes('Slow air')) {
+    return 'Air';
+  } else {
+    // Slip jig, Mazurka, Barndance, Slideなどは「その他」
+    return 'other';
+  }
+}
+
+// 曲をジャンルごとに分類する関数
+function categorizeTunesByGenre() {
+  // 分類をリセット
+  tunesByGenre = {
+    'Jig': [],
+    'Reel': [],
+    'Polka': [],
+    'Hornpipe': [],
+    'Air': [],
+    'other': []
+  };
+  
+  allTunes.forEach(tune => {
+    const genre = extractGenre(tune.name);
+    if (genre && tunesByGenre[genre]) {
+      tunesByGenre[genre].push(tune);
+    } else if (!genre) {
+      // ジャンルが不明な場合は「その他」に分類
+      tunesByGenre['other'].push(tune);
+    }
+  });
+}
 
 // tunes-list.htmlからすべての練習曲を抽出する関数
 function extractAllTunes(html) {
@@ -64,31 +122,62 @@ function extractAllTunes(html) {
   return tunes;
 }
 
-// ルーレット機能：ランダムに1曲を選んで表示
-function spinRoulette() {
+// ルーレット機能：指定されたジャンルからランダムに1曲を選んで表示
+function spinRoulette(genre) {
   if (allTunes.length === 0) {
     alert('曲リストが読み込まれていません。しばらく待ってから再度お試しください。');
     return;
   }
   
-  const randomIndex = Math.floor(Math.random() * allTunes.length);
-  const selectedTune = allTunes[randomIndex];
+  let targetTunes = [];
+  let genreDisplayName = '';
+  
+  if (genre === 'all') {
+    // 全ジャンルから選ぶ
+    targetTunes = allTunes;
+    genreDisplayName = '全ジャンル';
+  } else if (tunesByGenre[genre] && tunesByGenre[genre].length > 0) {
+    // 指定されたジャンルから選ぶ
+    targetTunes = tunesByGenre[genre];
+    genreDisplayName = getGenreDisplayName(genre);
+  } else {
+    alert(`${getGenreDisplayName(genre)}の曲が見つかりませんでした。`);
+    return;
+  }
+  
+  if (targetTunes.length === 0) {
+    alert(`${getGenreDisplayName(genre)}の曲が見つかりませんでした。`);
+    return;
+  }
+  
+  const randomIndex = Math.floor(Math.random() * targetTunes.length);
+  const selectedTune = targetTunes[randomIndex];
   
   // 結果を表示
   const resultDiv = document.getElementById('roulette-result');
   if (resultDiv) {
-    // リンクがある場合はリンク付きで表示、ない場合はテキストのみ
-    const tuneDisplay = selectedTune.url 
-      ? `<a href="${selectedTune.url}" target="_blank">${selectedTune.name}</a>`
-      : selectedTune.name;
-    
+    // リンクなしでテキストのみ表示
     resultDiv.innerHTML = `
       <div class="roulette-result-content">
         <h3>選ばれた曲</h3>
-        <p class="selected-tune">${tuneDisplay}</p>
+        <p class="selected-tune">${selectedTune.name}</p>
       </div>
     `;
     resultDiv.style.display = 'block';
   }
+}
+
+// ジャンルの表示名を取得する関数
+function getGenreDisplayName(genre) {
+  const displayNames = {
+    'all': '全ジャンル',
+    'Jig': 'Jig',
+    'Reel': 'Reel',
+    'Polka': 'Polka',
+    'Hornpipe': 'Hornpipe',
+    'Air': 'Air',
+    'other': 'other'
+  };
+  return displayNames[genre] || genre;
 }
 

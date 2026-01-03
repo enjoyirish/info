@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<title>ぬきうちセッション | Enjoy Irish ゆるゆる練習会</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="過去の練習曲からランダムに1曲を選んで演奏するぬきうちセッション機能">
+		<meta name="keywords" content="アイリッシュ音楽,アイリッシュセッション,ルーレット,ぬきうちセッション">
+		<meta name="robots" content="index, follow">
+		<link rel="stylesheet" href="css/common.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/roulette.css">
+		<link rel="icon" href="images/favicon.ico" type="image/x-icon">
+		</head>
+
+<body>
+<div id="header"></div>
+<div id="menubar-area"></div>
+  <div id="contents">
+      <main>
+        <section>
+          <h2 class="c box1">ぬきうちセッション</h2>
+          <div class="roulette-section">
+            <p class="roulette-instruction">ボタンを押して曲を選んでください</p>
+            <div class="genre-buttons">
+              <button class="genre-button" data-genre="all" onclick="spinRoulette('all')">
+                全ジャンル
+              </button>
+              <button class="genre-button" data-genre="Jig" onclick="spinRoulette('Jig')">
+                Jig
+              </button>
+              <button class="genre-button" data-genre="Reel" onclick="spinRoulette('Reel')">
+                Reel
+              </button>
+              <button class="genre-button" data-genre="Polka" onclick="spinRoulette('Polka')">
+                Polka
+              </button>
+              <button class="genre-button" data-genre="Hornpipe" onclick="spinRoulette('Hornpipe')">
+                Hornpipe
+              </button>
+              <button class="genre-button" data-genre="Air" onclick="spinRoulette('Air')">
+                Air
+              </button>
+              <button class="genre-button" data-genre="other" onclick="spinRoulette('other')">
+                その他
+              </button>
+            </div>
+            <div id="roulette-result" class="roulette-result" style="display: none;"></div>
+          </div>
+        </section>
+      </main>
+  </div>
+
+<div id="footer"></div>
+
+<!--jQueryの読み込み-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/main.js"></script>
+<script src="js/roulette.js"></script>
+</body>
+</html>
+

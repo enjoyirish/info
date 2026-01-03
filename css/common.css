@@ -219,6 +219,11 @@ a.ddmenu::before {
 }
 
 /* フッター */
+#footer {
+	margin-top: auto; /* コンテンツが少ない場合、フッターを画面下部に固定 */
+	flex-shrink: 0; /* フッターのサイズを固定 */
+}
+
 footer {
 	display: flex; /* flexboxを有効化 */
 	justify-content: center; /* 水平方向の中央配置 */

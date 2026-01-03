@@ -186,6 +186,9 @@ body {
   color: #777;
   line-height: 2;
   overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 html, body {
   font-size: 13px;
