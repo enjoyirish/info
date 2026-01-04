@@ -156,11 +156,15 @@ function spinRoulette(genre) {
   // 結果を表示
   const resultDiv = document.getElementById('roulette-result');
   if (resultDiv) {
-    // リンクなしでテキストのみ表示
+    // URLが存在する場合はリンク付きで表示、ない場合はテキストのみ
+    const tuneDisplay = selectedTune.url 
+      ? `<a href="${selectedTune.url}" target="_blank">${selectedTune.name}</a>`
+      : selectedTune.name;
+    
     resultDiv.innerHTML = `
       <div class="roulette-result-content">
         <h3>選ばれた曲</h3>
-        <p class="selected-tune">${selectedTune.name}</p>
+        <p class="selected-tune">${tuneDisplay}</p>
       </div>
     `;
     resultDiv.style.display = 'block';
